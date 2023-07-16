@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>HARD MAX</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/interfaz.css">
+  <link rel="icon" href="img/icouner.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/hardmax2.ico" type="image/x-icon">
+</head>
+
+<body>
+  <header id="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img href="index.html" class="logochico" src="img/hardmax1.png" alt="hardmax"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#FFFF"href="productos.html">PRODUCTOS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#FFFF"href="nosotros.html">NOSOTROS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="contacto.html">CONTACTO</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div id="app" class="container pb-5 pt-5">
+      <h1 class="lead fw-bold fs-1" >Productos</h1>
+      <br>
+      <a class="btn btn-primary" href="producto_nuevo.html">Nuevo <i class="fa-solid fa-upload" style="color: #ffffff;"></i></a>
+      <br><br>
+
+      <div v-if="error">
+        <p>Lo sentimos , ........</p>
+      </div>
+      <div v-else>
+        <section v-if="cargando">
+          <div class="spinner-border"></div>
+          <p>Cargando .....</p>
+        </section>
+        <section v-else>
+          <div class="table-responsive">
+            <table class="table mt-2 table-bordered table-striped">
+              <thead id="theadstyle">
+                <tr class="text-center">
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="text-center fst-italic text-uppercase">
+                <tr class="" v-for="producto in productos">
+                  <td scope="row">{{producto.id}}</td>
+                  <td>{{producto.nombre}}</td>
+                  <td>{{producto.precio}}</td>
+                  <td>{{producto.stock}}</td>
+                  <td>
+                    <img width="60" :src="producto.imagen" :alt="producto.nombre">
+                  </td>
+                  <td>
+                    <a class="btn btn-success" :href="'producto_update.html?id='+ producto.id" > <i class="fa-solid fa-pen" style="color: #ffffff;"></i></a>
+                    
+                    <button type="button" class="btn btn-danger" v-on:click="eliminar(producto.id)"> <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  
+
+
+
+  <footer class="bg-light text-dark pt-5 pb-4">
+    <div class="container text-center text-md-start">
+      <div class="row text-center text-md-start">
+
+        
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-secondary">Horario Atención</h5>
+          <hr class="mb-4">
+          <p> <a href="#" class="text-dark">Lunes a viernes: </a>
+          </p>
+          <p> <a href="#" class="text-dark"><i class="fa-regular fa-clock me-3"></i>15hs a 19:30hs</a>
+          </p>
+          <p> <a href="#" class="text-dark">Sabados:</a>
+          </p>
+          <p> <a href="#" class="text-dark"><i class="fa-regular fa-clock me-3"></i>10:30hs a 13:30hs</a>
+          </p>
+
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-secondary">Ayuda</h5>
+          <hr class="mb-4">
+          <p> <a href="#" class="text-dark">Botón Arrepentimiento</a>
+          </p>
+          <p> <a href="#" class="text-dark">Garantía Productos</a>
+          </p>
+          <p> <a href="#" class="text-dark"><li class="fas fa-envelope me-3"></li>Mail reclamo:</a>
+          </p>
+          <p> <a href="#" class="text-dark">reclamoshardmax@insumos.edu.ar</a>
+          </p>
+
+        </div>
+    
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-secondary">¡Contactanos!</h5>
+          <hr class="mb-4">
+          <p>
+            <li class="fas fa-location-dot me-3"></li>Corrientes 1019, Buenos Aires, CABA, Argentina
+          </p>
+          <p>
+            <li class="fas fa-envelope me-3"></li>hardmax@insumos.com.ar
+          </p>
+          <p>
+            <li class="fas fa-phone me-3"> </li>Whatsapp: +54 11 2357-5522
+          </p>
+
+
+        </div>
+        <hr class="mb-4">
+        <div class="text-center mb-2">
+          <p>
+            &copy; Copyright Todos los derechos reservados.
+            <a href="index.html">
+              <strong class="text-primary ">HardMax </strong>
+            </a>
+          </p>
+        </div>
+        <div class="text-center">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/codoacodooficial/" class="text-dark" target="_blank"> <i class="fab fa-facebook"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/EducacionBA" class="text-dark" target="_blank"> <i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://ar.linkedin.com/company/saalv/" class="text-dark" target="_blank"> <i class="fab fa-linkedin-in"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.youtube.com/@educacionBA" class="text-dark" target="_blank"> <i class="fab fa-youtube"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/programacodoacodo/" class="text-dark" target="_blank"> <i class="fab fa-instagram"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+  integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+  crossorigin="anonymous"></script>
+  <!-- <script src="./js/main.js"></script> -->
+  <!--Link de VUE-->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/productos.js"></script>
+</body>
+</html>
